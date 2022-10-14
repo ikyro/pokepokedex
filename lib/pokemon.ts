@@ -1,4 +1,4 @@
-export type Pokemon = {
+export type Pokemon = Partial<{
   name: string
   sprites: {
     back_default?: string
@@ -11,40 +11,75 @@ export type Pokemon = {
     front_shiny_female?: string
   }
   stats: {
-    base_stat: number
-    effort: number
-    stat: {
-      name: string
-      url: string
-    }
-  }
+    name: string
+    url: string
+  }[]
   types: {
-    slot: number
-    type: {
-      name: string
-      url: string
-    }
+    name: string
+    url: string
   }[]
   height: number
   weight: number
   id: number
-}
+}>
 
-export type Records = {
+type Stats = Partial<{
+  base_stat: number
+  effort: number
+  stat: {
+    name: string
+    url: string
+  }
+}>
+
+type Types = Partial<{
+  slot: number
+  type: {
+    name: string
+    url: string
+  }
+}>
+
+export type Queries = {
   name: string
   url: string
 }
 
-const getRandomNumber = (min: number, max: number) => {
+export const getRandomNumber = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
 export const getPokemon = async (url: string) => {
   const data = await fetch(url)
-  const { sprites, id, name, stats, types, height, weight } = await data.json()
+  const {
+    sprites: {
+      back_default,
+      back_female,
+      back_shiny,
+      back_shiny_female,
+      front_default,
+      front_female,
+      front_shiny,
+    },
+    id,
+    name,
+    height,
+    weight,
+    ...res
+  } = await data.json()
+  const stats = (res?.stats as Stats[]).map(({ stat }) => ({ ...stat }))
+  const types = (res?.types as Types[]).map(({ type }) => ({ ...type }))
 
   return {
-    sprites,
+    sprites: {
+      back_default,
+      back_female,
+      back_shiny,
+      back_shiny_female,
+      front_default,
+      front_female,
+      front_shiny,
+    },
     id,
     name,
     stats,
@@ -63,7 +98,7 @@ export const getRandomPokemon = async () => {
   }
 }
 
-export const getRecords = async () => {
+export const getQueries = async () => {
   const url = new URL('https://pokeapi.co/api/v2/pokemon')
   url.searchParams.append('limit', '100000')
 
@@ -71,6 +106,6 @@ export const getRecords = async () => {
   const { results } = await data.json()
 
   return {
-    records: results as Records[],
+    queries: results as Queries[],
   }
 }

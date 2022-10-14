@@ -31,7 +31,7 @@ export const PokemonInfo = ({ selected }: { selected: Pokemon }) => {
       <span className='text-ms ml-4'>height: {selected.weight}</span>
 
       <ul className='mt-4 flex flex-wrap items-center justify-center gap-2'>
-        {selected.types.map(({ type: { name } }) => (
+        {selected.types?.map(({ name }) => (
           <motion.li
             className='rounded-sm bg-[#ee1515] py-1 px-2 text-center text-sm'
             initial={{ opacity: 0, scale: 0 }}

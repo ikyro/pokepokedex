@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
-import { Records } from 'lib/pokemon'
+import { Queries } from 'lib/pokemon'
 import { useForm } from 'react-hook-form'
 
 type Inputs = {
   autocomplete: string
 }
 
-export const useAutocomplete = (initial: Records[]) => {
-  const [query, setQuery] = useState<Records[]>(initial)
+export const useAutocomplete = (initial: Queries[]) => {
+  const [query, setQuery] = useState<Queries[]>(initial)
   const { register, watch } = useForm<Inputs>()
 
   useEffect(() => {

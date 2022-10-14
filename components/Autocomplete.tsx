@@ -1,5 +1,5 @@
 import { useAutocomplete } from 'hooks/useAutocomplete'
-import { getPokemon, Pokemon, Records } from 'lib/pokemon'
+import { getPokemon, Pokemon, Queries } from 'lib/pokemon'
 import { useState } from 'react'
 import { PokemonInfo } from 'components/PokemonInfo'
 
@@ -7,7 +7,7 @@ export const Autocomplete = ({
   autocomplete,
   random,
 }: {
-  autocomplete: Records[]
+  autocomplete: Queries[]
   random: Pokemon
 }) => {
   const { query, register } = useAutocomplete(autocomplete)
