@@ -1,4 +1,4 @@
-name: Vitest
+name: tests
 
 on:
   push:
@@ -15,5 +15,5 @@ jobs:
           node-version: 18
           check-latest: true
       - run: npm i -g pnpm@latest
-      - run: pnpm i
+      - run: pnpm i --no-frozen-lockfile
       - run: pnpm run test:actions
