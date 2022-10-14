@@ -16,4 +16,4 @@ jobs:
           check-latest: true
       - run: npm i -g pnpm@latest
       - run: pnpm i
-      - run: pnpm test
+      - run: pnpm run test
