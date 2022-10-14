@@ -1,10 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import {
-  getRandomNumber,
-  getPokemon,
-  getRandomPokemon,
-  getQueries,
-} from 'lib/pokemon'
+import { getRandomPokemon, getQueries } from 'lib/pokemon'
 
 const keys = ['sprites', 'id', 'name', 'stats', 'types', 'height', 'weight']
 
